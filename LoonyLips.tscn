@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://LoonyLips.gd" type="Script" id=1]
 [ext_resource path="res://Loony-Lips-gfx/gfx/blackboard.jpg" type="Texture" id=2]
 [ext_resource path="res://Loony-Lips-gfx/gfx/Feltpen.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Loony-Lips-gfx/gfx/blue_button11.png" type="Texture" id=4]
+[ext_resource path="res://Loony-Lips-gfx/gfx/blue_button12.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -10,6 +12,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 35
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
 font_data = ExtResource( 3 )
 
 [node name="LoonyLips" type="Control"]
@@ -33,18 +39,49 @@ margin_bottom = -24.0
 alignment = 2
 
 [node name="DisplayText" type="Label" parent="VBoxContainer"]
-margin_top = 3.0
+margin_top = 28.0
 margin_right = 1752.0
-margin_bottom = 803.0
-rect_min_size = Vector2( 0, 800 )
+margin_bottom = 778.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 750 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0.960784, 0, 1 )
 text = "Placeholder"
 autowrap = true
 
-[node name="PlayerText" type="LineEdit" parent="VBoxContainer"]
-margin_top = 807.0
-margin_right = 1500.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 782.0
+margin_right = 1752.0
 margin_bottom = 872.0
+rect_min_size = Vector2( 0, 50 )
+custom_constants/separation = 10
+
+[node name="PlayerText" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_top = 12.0
+margin_right = 1346.0
+margin_bottom = 77.0
+size_flags_horizontal = 7
+size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
-[connection signal="text_entered" from="VBoxContainer/PlayerText" to="." method="_on_PlayerText_text_entered"]
+
+[node name="ProceedButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1356.0
+margin_right = 1446.0
+margin_bottom = 90.0
+grow_vertical = 0
+rect_min_size = Vector2( 90, 90 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+expand = true
+
+[node name="PlayAgainLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1456.0
+margin_top = 13.0
+margin_right = 1752.0
+margin_bottom = 76.0
+custom_fonts/font = SubResource( 3 )
+text = "Play Again?"
+[connection signal="text_entered" from="VBoxContainer/HBoxContainer/PlayerText" to="." method="_on_PlayerText_text_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ProceedButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ProceedButton" to="." method="_on_ProceedButton_pressed"]
