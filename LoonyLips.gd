@@ -9,10 +9,9 @@ onready var PlayerText = $VBoxContainer/HBoxContainer/PlayerText
 onready var DisplayText = $VBoxContainer/DisplayText
 
 func _ready():
-	if player_words.size() == 0:
-		DisplayText.text = StoryIntro + "May I have " + StoryWordType[player_words.size()] + " please ?"
-	else:
-		check_player_words_length()
+	
+	DisplayText.text = StoryIntro
+	check_player_words_length()
 	
 
 
@@ -27,7 +26,8 @@ func _on_ProceedButton_pressed():
 
 func add_to_player_words():
 	player_words.append(PlayerText.text)
-	PlayerText.clear();
+	DisplayText.text = ""
+	PlayerText.clear()
 	check_player_words_length()
 
 func is_story_done():
@@ -46,5 +46,5 @@ func tell_story():
 
 
 func prompt_player():
-	DisplayText.text = "May I have " + StoryWordType[player_words.size()] + " please ?"
+	DisplayText.text += "May I have " + StoryWordType[player_words.size()] + " please ?"
 	
