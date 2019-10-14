@@ -2,19 +2,47 @@ extends Control
 
 var player_words = []
 var StoryIntro = "Welcome to Loony lips, a fun party game to tell weird stories!\n\n"
-var StoryScript = "In the beginning, there was %s and he was %s. In the end, he felt %s, and thus went to %s."
-var StoryWordType = ["a name", "an adverb", "an adjective" , "a noun" ]
+var Template = [
+		{
+		"StoryWordType":["a name", "an adverb", "an adjective" , "a noun" ],
+		"StoryScript" : "In the beginning, there was %s and he was %s. In the end, he felt %s, and thus went to %s."
+		}, 
+		
+		{"StoryWordType" : ["a noun", "an adjective", "an noun" , "a verb" ],
+		"StoryScript" : "In the end the world was on %s. It was a %s day, and there was much %s in prepration. However, humanity was determined to %s. In the end, he felt %s, and thus went to %s."
+		}, 
+		
+		{
+		"StoryWordType" : ["name", "number",  "fast food", "number", "openable object"],
+		"StoryScript" : "Once upon a time %s bought %s %s's even though only %s cound fit in the %s."
+		},
+		
+		{
+		"StoryWordType" : ["name", "object",  "adjective", "adverb"],
+		"StoryScript" : "In a land never seen %s found a %s, and used it for his own %s purposes. From there time progressed %s"
+		},
+		
+		{
+		"StoryWordType" : ["object", "noun",  "place", "adjective", "adjective", "adjective", "noun"],
+		"StoryScript" : "In a galexy far far away a tiny %s tried to find %s way to the %s. It was a %s and %s jorney that was %s with %s."
+		}]
+
+var CurrentStory 
 
 onready var PlayerText = $VBoxContainer/HBoxContainer/PlayerText
 onready var DisplayText = $VBoxContainer/DisplayText
 onready var ButtonLabel = $VBoxContainer/HBoxContainer/ButtonLabel
 
 func _ready():
+	set_current_story()
 	DisplayText.text = StoryIntro
 	check_player_words_length()
 	PlayerText.grab_focus()
 	
 
+func set_current_story():
+	randomize()
+	CurrentStory = Template[randi() % Template.size()]
 
 func _on_PlayerText_text_entered(new_text):
 	add_to_player_words()
@@ -37,7 +65,7 @@ func add_to_player_words():
 
 func is_story_done():
 	
-	return player_words.size() == StoryWordType.size()
+	return player_words.size() == CurrentStory.StoryWordType.size()
 	
 
 
@@ -49,10 +77,10 @@ func check_player_words_length():
 
 
 func tell_story():
-	DisplayText.text  = StoryScript % player_words
+	DisplayText.text  = CurrentStory.StoryScript % player_words
 
 func prompt_player():
-	DisplayText.text += "May I have " + StoryWordType[player_words.size()] + " please ?"
+	DisplayText.text += "May I have " + CurrentStory.StoryWordType[player_words.size()] + " please ?"
 
 
 func end_game():
