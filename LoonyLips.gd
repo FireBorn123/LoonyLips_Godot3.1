@@ -2,32 +2,33 @@ extends Control
 
 var player_words = []
 var StoryIntro = "Welcome to Loony lips, a fun party game to tell weird stories!\n\n"
-var Template = [
-		{
-		"StoryWordType":["a name", "an adverb", "an adjective" , "a noun" ],
-		"StoryScript" : "In the beginning, there was %s and he was %s. In the end, he felt %s, and thus went to %s."
-		}, 
-		
-		{"StoryWordType" : ["a noun", "an adjective", "an noun" , "a verb" ],
-		"StoryScript" : "In the end the world was on %s. It was a %s day, and there was much %s in prepration. However, humanity was determined to %s. In the end, he felt %s, and thus went to %s."
-		}, 
-		
-		{
-		"StoryWordType" : ["name", "number",  "fast food", "number", "openable object"],
-		"StoryScript" : "Once upon a time %s bought %s %s's even though only %s cound fit in the %s."
-		},
-		
-		{
-		"StoryWordType" : ["name", "object",  "adjective", "adverb"],
-		"StoryScript" : "In a land never seen %s found a %s, and used it for his own %s purposes. From there time progressed %s"
-		},
-		
-		{
-		"StoryWordType" : ["object", "noun",  "place", "adjective", "adjective", "adjective", "noun"],
-		"StoryScript" : "In a galexy far far away a tiny %s tried to find %s way to the %s. It was a %s and %s jorney that was %s with %s."
-		}]
+#var Template = [
+#		{
+#		"StoryWordType":["a name", "an adverb", "an adjective" , "a noun" ],
+#		"StoryScript" : "In the beginning, there was %s and he was %s. In the end, he felt %s, and thus went to %s."
+#		}, 
+#
+#		{"StoryWordType" : ["a noun", "an adjective", "an noun" , "a verb" ],
+#		"StoryScript" : "In the end the world was on %s. It was a %s day, and there was much %s in prepration. However, humanity was determined to %s. In the end, he felt %s, and thus went to %s."
+#		}, 
+#
+#		{
+#		"StoryWordType" : ["name", "number",  "fast food", "number", "openable object"],
+#		"StoryScript" : "Once upon a time %s bought %s %s's even though only %s cound fit in the %s."
+#		},
+#
+#		{
+#		"StoryWordType" : ["name", "object",  "adjective", "adverb"],
+#		"StoryScript" : "In a land never seen %s found a %s, and used it for his own %s purposes. From there time progressed %s"
+#		},
+#
+#		{
+#		"StoryWordType" : ["object", "noun",  "place", "adjective", "adjective", "adjective", "noun"],
+#		"StoryScript" : "In a galexy far far away a tiny %s tried to find %s way to the %s. It was a %s and %s jorney that was %s with %s."
+#		}]
 
-var CurrentStory 
+# var CurrentStory 
+var CurrentStory = {}
 
 onready var PlayerText = $VBoxContainer/HBoxContainer/PlayerText
 onready var DisplayText = $VBoxContainer/DisplayText
@@ -42,7 +43,12 @@ func _ready():
 
 func set_current_story():
 	randomize()
-	CurrentStory = Template[randi() % Template.size()]
+	var Stories = $Storybook.get_child_count()
+	var SelectedStory = randi() % Stories
+	
+	CurrentStory.StoryWordType  = $Storybook.get_child(SelectedStory).StoryWordType
+	CurrentStory.StoryScript = $Storybook.get_child(SelectedStory).StoryScript
+#	CurrentStory = Template[randi() % Template.size()]
 
 func _on_PlayerText_text_entered(new_text):
 	add_to_player_words()
