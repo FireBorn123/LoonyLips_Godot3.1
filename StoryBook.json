@@ -1,0 +1,25 @@
+[
+  {
+  "StoryWordType":["a name", "an adverb", "an adjective" , "a noun" ],
+  "StoryScript" : "In the beginning, there was %s and he was %s. In the end, he felt %s, and thus went to %s."
+  },
+
+  {"StoryWordType" : ["a noun", "an adjective", "an noun" , "a verb" ],
+  "StoryScript" : "In the end the world was on %s. It was a %s day, and there was much %s in preparation. However, humanity was determined to %s. In the end, he felt %s, and thus went to %s."
+  },
+
+  {
+  "StoryWordType" : ["name", "number",  "fast food", "number", "openable object"],
+  "StoryScript" : "Once upon a time %s bought %s %s's even though only %s cound fit in the %s."
+  },
+
+  {
+  "StoryWordType" : ["name", "object",  "adjective", "adverb"],
+  "StoryScript" : "In a land never seen %s found a %s, and used it for his own %s purposes. From there time progressed %s"
+  },
+
+  {
+  "StoryWordType" : ["object", "noun",  "place", "adjective", "adjective", "adjective", "noun"],
+  "StoryScript" : "In a galexy far far away a tiny %s tried to find %s way to the %s. It was a %s and %s jorney that was %s with %s."
+  }
+]
